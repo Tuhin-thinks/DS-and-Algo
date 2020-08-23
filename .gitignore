@@ -1,0 +1,9 @@
+open_cmd.bat
+.idea/Algorithms.iml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/inspectionProfiles/profiles_settings.xml
+.idea/misc.xml
+*.xml
+*.bat
+*.exe
