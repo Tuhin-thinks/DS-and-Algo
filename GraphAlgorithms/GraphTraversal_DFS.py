@@ -30,22 +30,22 @@ class Graph:
             visited = list()
         if u not in visited:
             visited.append(u)
-            print(u, end=f"{visited} -> ")
+            print(u, end=f" -> ")
 
         # explore any unvisited node from u
         try:
             adjacent_vertices = self.adj(u)
         except KeyError:
-            print(f"{Fore.BLUE}No exiting node from {u}{Style.RESET_ALL}")
+            print(f"{Fore.BLUE}No nodes to visit from {u}{Style.RESET_ALL}")
             # print(" -> ".join(visited[:-1]), end=f" -> {u}\n")
-            print(f"{Fore.RED}[DEL] visited : {visited}{Fore.RESET}")
+            # print(f"{Fore.RED}[DEL] visited : {visited}{Fore.RESET}")
             visited.clear()
-            print(f"{Fore.GREEN}[OVER]{u}, {visited}{Fore.RESET}")
+            # print(f"{Fore.GREEN}[OVER]{u}, {visited}{Fore.RESET}")
             return
 
         for V in [i for i in adjacent_vertices if i not in visited]:
             self.dfs(V)
-        print(f"{Fore.GREEN}[OVER]{u}, {visited}{Fore.RESET}")
+        # print(f"{Fore.GREEN}[OVER]{u}, {visited}{Fore.RESET}")
 
 
 # Edges
