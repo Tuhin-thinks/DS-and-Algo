@@ -8,3 +8,4 @@ open_cmd.bat
 *.xml
 *.bat
 *.exe
+*.vscode/
