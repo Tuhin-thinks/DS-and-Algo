@@ -1,3 +1,5 @@
+
+# do pip install colorama, if you don't have the below module
 from colorama import Fore, Back, Style
 
 visited = list()
