@@ -5,6 +5,7 @@ open_cmd.bat
 .idea/vcs.xml
 .idea/inspectionProfiles/profiles_settings.xml
 .idea/misc.xml
+**/.ipynb_checkpoints/
 *.xml
 *.bat
 *.exe
