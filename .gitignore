@@ -10,3 +10,4 @@ open_cmd.bat
 *.bat
 *.exe
 *.vscode/
+**/*.out
