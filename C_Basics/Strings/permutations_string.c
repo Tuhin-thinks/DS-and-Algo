@@ -2,13 +2,17 @@
 #include <stdlib.h>
 #include <string.h>
 
-/* to find the character that is lex. smaller than the character at its right */
+/* Solution of the HackerRank problem 
+   link: https://www.hackerrank.com/challenges/permutations-of-strings/problem
+*/
+
+/* to find the character that is lexicographically smaller than the character at its right */
 int right_side_greater(char **ch, int size){
-    printf("array length:%d\n", size);
+    // printf("array length:%d\n", size);
     for(int i=(size-1); i>=0; i--){
-        printf("comparing %s(left) with %s(right)\n", ch[i-1], ch[i]);
+        // printf("comparing %s(left) with %s(right)\n", ch[i-1], ch[i]);
         if (strcmp(ch[i], ch[i-1])>0){  // if right character greater than left
-            printf("returning at element:%s(%d)\n", ch[i-1], (i-1));
+            // printf("returning at element:%s(%d)\n", ch[i-1], (i-1));
             return (i-1);  // then return left character
         }
     }
@@ -23,7 +27,7 @@ void sort_lexicographically(char **array, int from, int array_size) {
         {
             if (strcmp(array[j], array[j+1]) > 0)
             {
-                printf("position %d(%s) swapped with %d(%s)\n", i, array[i], j, array[j]);
+                // printf("position %d(%s) swapped with %d(%s)\n", i, array[i], j, array[j]);
                 temp = array[j];
                 array[j] = array[j+1];
                 array[j+1] = temp;
@@ -39,19 +43,19 @@ void lowest_greater(char **ch, int size, int from, char * str_comp){
     min_char = ch[from+1];
     for (int i=(from+1); i<size; i++){
         char_now = ch[i];
-        printf("\ncomparing %s with %s\n", char_now, str_comp);
+        // printf("\ncomparing %s with %s\n", char_now, str_comp);
         if (strcmp(char_now, str_comp) > 0){
-            printf("  -> comparing %s with %s\n", char_now, min_char);
+            // printf("  -> comparing %s with %s\n", char_now, min_char);
             if (strcmp(min_char, char_now) > 0)
                 {
-                    printf("  min_char changed to: %s(%d), from %s", char_now, i, min_char);
+                    // printf("  min_char changed to: %s(%d), from %s", char_now, i, min_char);
                     min_greater_index = i;
-                    printf("  matching index changed to: %d\n\n", i);
+                    // printf("  matching index changed to: %d\n\n", i);
                     min_char = char_now;
                 }
         }
     }
-    printf("min_char: %s(%d), str_cmp: %s\n", min_char, min_greater_index, str_comp);
+    // printf("min_char: %s(%d), str_cmp: %s\n", min_char, min_greater_index, str_comp);
     // swap the characters
     char *temp = ch[from];
     ch[from] = min_char;
@@ -68,52 +72,45 @@ void printArray(char *array[],int from, int len) {
 
 int next_permutation(int n, char **s)
 {
-	/**
-	* Complete this method
-	* Return 0 when there is no next permutation and 1 otherwise
-	* Modify array s to its next permutation
-	*/
+    // char* s[20] = {"2", "1", "4", "3"};
+    int pos = right_side_greater(s, n);
+    if (pos != -1)
+    {
+        // printf("stopped at element: %s, pos=%d\n", s[pos], pos);
+        // printf("right side array: ");
+        // printArray(s, pos+1, n);
+    }
+    else{
+        // printf("no such instance found\n");
+        return 0;
+    }
+
+    lowest_greater(s, n, pos, s[pos]);
+    sort_lexicographically(s, pos+1, n);
+    
+    printf("\nFinal array: ");
+    printArray(s, 0, n);
+    return 1;
 }
 
 int main()
 {
-	// char **s;
-	// int n;
-	// scanf("%d", &n);
-	// s = calloc(n, sizeof(char*));
-	// for (int i = 0; i < n; i++)
-	// {
-	// 	s[i] = calloc(11, sizeof(char));
-	// 	scanf("%s", s[i]);
-	// }
-	// do
-	// {
-	// 	for (int i = 0; i < n; i++)
-	// 		printf("%s%c", s[i], i == n - 1 ? '\n' : ' ');
-	// } while (next_permutation(n, s));
-	// for (int i = 0; i < n; i++)
-	// 	free(s[i]);
-	// free(s);
-	// return 0;
-
-    int arrlen = 4;
-    char* sa[20] = {"2", "1", "4", "3"} ;
-    int pos = right_side_greater(sa, arrlen);
-    if (pos != -1)
-    {
-        printf("stopped at element: %s, pos=%d\n", sa[pos], pos);
-        printf("right side array: ");
-        printArray(sa, pos+1, arrlen);
-    }
-    else{
-        printf("no such instance found\n");
-    }
-
-    lowest_greater(sa, arrlen, pos, sa[pos]);
-    sort_lexicographically(sa, pos+1, arrlen);
-    
-    printf("\nFinal array: ");
-    printArray(sa, 0, arrlen);
-
-    return 0;
+	char **s;
+	int n;
+	scanf("%d", &n);
+	s = calloc(n, sizeof(char*));
+	for (int i = 0; i < n; i++)
+	{
+		s[i] = calloc(11, sizeof(char));
+		scanf("%s", s[i]);
+	}
+	do
+	{
+		for (int i = 0; i < n; i++)
+			printf("%s%c", s[i], i == n - 1 ? '\n' : ' ');
+	} while (next_permutation(n, s));
+	for (int i = 0; i < n; i++)
+		free(s[i]);
+	free(s);
+	return 0;
 }
